@@ -8,3 +8,5 @@
 2. 进行物种间蛋白序列比较
 
 3. 结果可视化
+
+<img src="figures/fig1.PNG">
