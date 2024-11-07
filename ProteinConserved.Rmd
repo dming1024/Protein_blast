@@ -1,0 +1,84 @@
+---
+title: "蛋白保守序列分析"
+author: "deming1024"
+date: "2021年2月24日"
+output: 
+  html_document:
+    number_sections: true
+    theme: paper
+    fig_width: 6
+    fig_height: 3.5
+---
+<style type="text/css">
+title{
+  text-align:center;
+  font-size:20pt;
+}
+#header{
+text-align:center;
+font-size:20pt;
+}
+h1{
+  font-size:15pt;
+}
+
+</style>
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+生物体在基因或蛋白水平从来都不孤独的，往往都有一些共同的进化来源。通常来讲，在我们体内发挥重要功能的蛋白，也会在其他生物体中发挥功能。这类蛋白之间可能会存在以下一些情况：
+
++ 有着类似的生物学功能
+
++ 不同物种中还有额外功能
+
++ 其他未知的功能
+
+通过对蛋白保守区域的分析，可以帮助我们了解：**生物的起源**，**蛋白功能的演化**，**探索新的机制或功能**。
+
+这里我们以DNA mismatch蛋白--MSH6为例，比较其蛋白MSH功能域在不同物种中的变化。
+
+# 在NCBI中检索基因
+
+根据Gene symbols，在NCBI数据库中检索对应基因编码的蛋白质序列
+
+在5个物种中的MSH6蛋白中，均有4类MSH domains存在，但是在<font style="color:red">Rat</font>中暂没注释信息。
+```{r echo=F}
+msh_df=readxl::read_xlsx("msh.xlsx",sheet = "Sheet1")
+
+knitr::kable(msh_df)
+```
+
+<strong style="font-size:6;color:grey">Note: MSH domain的注释信息来源于NCBI</strong>
+
+
+# 氨基酸序列比对
+对6个物种中，全长氨基酸序列进行比对：
+“!”表示在所有比对物种中，氨基酸序列均一致。这里展示部分比对结果
+<br></br>
+<img src="./figures/fig1.png" style="width:700px"></img>
+
++ 氨基酸序列在6个物种中较为保守
+
+
+# MSH Domain II局部比对
+提取Human，Mouse的MSH DomainII 为参考，比较6个物种该段氨基酸序列，在Rat以及其他物种中的分布:
+<br></br>
+<img src="./figures/fig2.png" style="width:700px"></img>
+
++ 6个物种均存在MSH domain
++ <strong>Rat的Msh6蛋白序列中，也存在MSH Domain II</strong>
+
+
+# MSH6蛋白进化树
+根据MSH6的保守区域的比较结果，绘制MSH6在6个物种中的进化树。
+<br></br>
+<img src="./figures/fig3.png" style="height:300px"></img>
+
++ Monkey,Human进化树上最为接近
+
+<br></br>
+<strong style="font-size:6;color:grey">以上分析均采用R markdown完成</strong>
